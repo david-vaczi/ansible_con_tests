@@ -1,0 +1,4 @@
+- name: Connection tests for UNIX hosts
+  hosts: all
+  tasks:
+    - ping:

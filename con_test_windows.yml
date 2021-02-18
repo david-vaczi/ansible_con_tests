@@ -6,6 +6,9 @@
   - role: socks-tunnel-role
     run-once: true
     delegate_to: localhost
+    
+- name: Pingpong
+  hosts: all
   tasks:
     - name: Ping
       win_ping:

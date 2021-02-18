@@ -34,6 +34,7 @@
         - jh_socks_port is defined
 
     - name: Being an animal and doing it anyway
+      delegate_to: localhost
       shell: bash -c 'ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=no -CfNq -D /tmp/mysocks-{{ account_code }}-{{ trans_num }}-{{ jh_socks_port }} -i {{ jumphost_ssh_private_key }} -p {{ jumphost_ssh_port }} {{ jumphost_ssh_user }}@{{ jumphost_ip }} -vvvvvv;sleep 5'
     
 #    - name: Creating socks tunnel without passphrase for single jumphost

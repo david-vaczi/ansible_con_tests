@@ -1,6 +1,7 @@
 ---
 - name: Connection tests for Windows hosts
   hosts: all
+  gather_facts: false
   roles:
   - role: socks-tunnel-role
     run-once: true

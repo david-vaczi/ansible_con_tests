@@ -4,35 +4,6 @@
     account_code: "{{ acc_id | default('NA') }}"
     trans_num: "{{ transaction_id | default(999999999999999 | random(start=1)) | replace('\"', '') }}"
 
-- name: Set jumphost facts
-  set_fact:
-    "{{ 'jumphost' ~ (level + 1) ~ '_ip' }}": "{{ hostvars['localhost']['jump_hosts'][level]['ip'] }}"
-    "{{ 'jumphost' ~ (level + 1) ~ '_ssh_user' }}": "{{ hostvars['localhost']['jump_hosts'][level]['ssh_user'] }}"
-    "{{ 'jumphost' ~ (level + 1) ~ '_ssh_port' }}": "{{ hostvars['localhost']['jump_hosts'][level]['ssh_port'] }}"
-    "{{ 'jumphost' ~ (level + 1) ~ '_ssh_private_key' }}": "{{ hostvars['localhost']['jump_hosts'][level]['ssh_private_key'] }}"
-    "{{ 'jumphost' ~ (level + 1) ~ '_ssh_private_key_passphrase' }}": "{{
-      hostvars['localhost']['jump_hosts'][level]['ssh_private_key_passphrase']|default('') }}"
-  loop: "{{ (hostvars['localhost']['jump_hosts'])|default([]) }}"
-  loop_control:
-    index_var: level
-  when: hostvars['localhost']['jump_hosts'] is defined
-
-- name: Default jumphost facts to extra variables
-  set_fact:
-    "{{ 'jumphost_ip' }}": "{{ vars.get('jh_ip') }}"
-    "{{ 'jumphost_ssh_user' }}": "{{ vars.get('jh_ssh_user') }}"
-    "{{ 'jumphost_ssh_port' }}": "{{ vars.get('jh_ssh_port') }}"
-    "{{ 'jumphost_ssh_private_key' }}": "{{ lookup('vars', 'jh_ssh_private_key') }}"
-    "{{ 'jumphost_ssh_private_key_passphrase' }}": "{{ lookup('vars', 'jh_ssh_private_key_passphrase') }}"
-
-- name: Creating socks tunnel without passphrase for single jumphost
-  block:
-    - name: Setting of required socks_port variables for single jumphost
-      set_fact:
-        jh_socks_port: "{{ jh_socks_port }}"
-      when:
-        - jh_socks_port is defined
-
     - name: FUCK THIS SHIT
       shell: ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ControlMaster=auto -o ControlPersist=no -i {{ jumphost_ssh_private_key }} -p {{ jumphost_ssh_port }} {{ jumphost_ssh_user }}@{{ jumphost_ip }} -vvvvvv;sleep 5
 

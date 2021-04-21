@@ -1,5 +1,6 @@
 - name: Connection tests for UNIX hosts
   hosts: all
+  ignore_errors: true
   tasks:
     - ping:
     - name: Set current job_id as stat

@@ -9,5 +9,6 @@
       set_stats:
         data:
           log_job_id: "{{ tower_job_id }}"
+        aggregate: false
     - debug:
         var: log_job_id

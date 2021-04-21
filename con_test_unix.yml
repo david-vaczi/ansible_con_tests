@@ -9,6 +9,5 @@
       set_stats:
         data:
           log_job_id: "{{ tower_job_id }}"
-        per_host: true
     - debug:
         var: log_job_id

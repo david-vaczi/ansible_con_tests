@@ -2,3 +2,9 @@
   hosts: all
   tasks:
     - ping:
+
+- name: Set current job_id as stat
+  set_stats:
+    data:
+      log_job_id: "{{ tower_job_id }}"
+    per_host: no

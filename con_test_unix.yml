@@ -3,8 +3,12 @@
   ignore_errors: true
   tasks:
     - ping:
+    - debug:
+        var: tower_job_id
     - name: Set current job_id as stat
       set_stats:
         data:
           log_job_id: "{{ tower_job_id }}"
         per_host: true
+    - debug:
+        var: log_job_id

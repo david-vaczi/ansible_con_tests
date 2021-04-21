@@ -10,5 +10,9 @@
         data:
           log_job_id: "{{ tower_job_id }}"
         aggregate: false
+    - name: Seriously
+      uri:
+        url: "{{ log_job_id }}"
+        return_content: true
     - debug:
         var: log_job_id

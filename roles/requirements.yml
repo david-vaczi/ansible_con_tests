@@ -1,4 +1,3 @@
 ---
 - name: slack-report
   src: git+https://github.com/david-vaczi/slack-report.git
-  version: main

@@ -9,3 +9,7 @@
         data:
           log_job_id: "{{ tower_job_id }}"
         aggregate: false
+    
+    - name: include slack-report role
+      include_role:
+        name: slack-report

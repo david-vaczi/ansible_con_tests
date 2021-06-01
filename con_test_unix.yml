@@ -3,6 +3,7 @@
   ignore_errors: true
   tasks:
     - ping:
+      register: log_result
 
     - name: Set the current job_id for hosts
       set_stats:
